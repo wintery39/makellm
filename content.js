@@ -1,22 +1,10 @@
-// 예: 특정 클래스에 스타일 변경 적용
-const htmlContent = document.documentElement.outerHTML;
-console.log(htmlContent);
+// 페이지의 HTML을 가져오기
+const pageHTML = document.documentElement.outerHTML;
 
-const cssLinks = [...document.styleSheets]
-  .filter(sheet => sheet.href)  // href가 있는 외부 CSS 파일만 필터링
-  .map(sheet => sheet.href);
-
-console.log(cssLinks);
-
-
-const scriptLinks = [...document.scripts]
-  .filter(script => script.src)  // src가 있는 외부 JavaScript 파일만 필터링
-  .map(script => script.src);
-
-console.log(scriptLinks);
-
-
-document.querySelectorAll('.specific-class').forEach(function(element) {
-  element.style.fontSize = '20px';
-  element.style.color = 'blue';
+// 백그라운드로 HTML을 전송
+chrome.runtime.sendMessage({
+  action: "getHTML",
+  data: pageHTML
+}, (response) => {
+  console.log("Background response:", response.status);
 });

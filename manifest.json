@@ -1,18 +1,19 @@
 {
-    "manifest_version": 3,
-    "name": "Custom Style Changer",
-    "version": "1.0",
-    "description": "Modify CSS and JavaScript of a specific website",
-    "permissions": ["activeTab", "scripting"],
-    "action": {
-      "default_popup": "popup.html"
-    },
-    "content_scripts": [
-      {
-        "matches": ["https://*/*"],
-        "js": ["content.js"],
-        "css": ["newstyle.css"]
-      }
-    ]
-  }
-  
+  "manifest_version": 3,
+  "name": "HTML Loader Extension",
+  "version": "1.0",
+  "permissions": ["activeTab", "scripting"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
